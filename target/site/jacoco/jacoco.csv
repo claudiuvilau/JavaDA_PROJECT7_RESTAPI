@@ -1,5 +1,5 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-poseidon,com.nnk.springboot.controllers,LoginController,75,94,0,0,26,24,12,6,12,6
+poseidon,com.nnk.springboot.controllers,LoginController,87,95,0,0,29,24,13,6,13,6
 poseidon,com.nnk.springboot.controllers,HomeController,12,19,0,0,3,5,1,3,1,3
 poseidon,com.nnk.springboot.controllers,CurveController,48,190,2,6,9,44,5,9,3,7
 poseidon,com.nnk.springboot.controllers,UserController,55,191,2,6,11,46,5,9,3,7
@@ -7,7 +7,7 @@ poseidon,com.nnk.springboot.controllers,BidListController,48,192,2,6,9,44,5,9,3,
 poseidon,com.nnk.springboot.controllers,RatingController,48,186,2,6,9,44,5,9,3,7
 poseidon,com.nnk.springboot.controllers,TradeController,48,192,2,6,9,44,5,9,3,7
 poseidon,com.nnk.springboot.controllers,RuleNameController,48,186,2,6,9,44,5,9,3,7
-poseidon,com.nnk.springboot.configuration,SpringSecurityConfig,0,58,0,0,0,16,0,6,0,6
+poseidon,com.nnk.springboot.configuration,SpringSecurityConfig,0,55,0,0,0,16,0,6,0,6
 poseidon,com.nnk.springboot.service,LoggerApi,42,67,5,3,10,18,6,5,2,5
 poseidon,com.nnk.springboot.service,MyUserDetailService,31,73,4,4,6,19,4,4,0,4
 poseidon,com.nnk.springboot.service,FormatDate,30,52,1,1,13,16,7,4,6,4
