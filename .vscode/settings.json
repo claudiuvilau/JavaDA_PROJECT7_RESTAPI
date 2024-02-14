@@ -1,7 +1,0 @@
-{
-    "java.configuration.updateBuildConfiguration": "interactive",
-    "javadoc-tools.generateJavadoc.runMode": "-public",
-    "githubPullRequests.ignoredPullRequestBranches": [
-        "master"
-    ]
-}
