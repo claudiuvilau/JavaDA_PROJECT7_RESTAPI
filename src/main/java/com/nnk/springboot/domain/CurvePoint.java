@@ -1,12 +1,14 @@
 package com.nnk.springboot.domain;
 
+import java.sql.Timestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import java.sql.Timestamp;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "curvepoint")
@@ -17,6 +19,7 @@ public class CurvePoint {
     private Integer id;
 
     @Column(name = "CurveId")
+    @NotNull(message = "must not be null")
     private Integer curveId;
 
     @Column(name = "asOfDate")
@@ -44,16 +47,10 @@ public class CurvePoint {
         this.creationDate = creationDate;
     }
 
-    /**
-     * @return Integer
-     */
     public Integer getId() {
         return this.id;
     }
 
-    /**
-     * @param id
-     */
     public void setId(Integer id) {
         this.id = id;
     }
