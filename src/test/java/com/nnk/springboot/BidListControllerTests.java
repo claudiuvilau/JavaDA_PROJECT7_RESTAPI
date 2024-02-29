@@ -180,7 +180,7 @@ public class BidListControllerTests {
     public void testUpdateBidList() throws Exception {
 
         String idString = "1";
-        mockMvc.perform(post("/bidList/update/{id}", idString).with(csrf())
+        mockMvc.perform(put("/bidList/update/{id}", idString).with(csrf())
                 .param("account", "account")
                 .param("type", "type")
                 .param("bidQuantity", "1")
@@ -202,7 +202,7 @@ public class BidListControllerTests {
                 .param("dealType", "dealType")
                 .param("sourceListId", "sourceListId")
                 .param("side", "side"))
-                .andDo(print()).andExpect(status().isFound()); // respose 302
+                .andDo(print()).andExpect(redirectedUrl("/bidList/list"));
     }
 
     @Test
@@ -211,7 +211,7 @@ public class BidListControllerTests {
 
         // Type number bidQuantity is error => has error
         String idString = "1";
-        mockMvc.perform(post("/bidList/update/{id}", idString).with(
+        mockMvc.perform(put("/bidList/update/{id}", idString).with(
                 csrf())
                 .param("account", "account")
                 .param("type", "type")
@@ -240,6 +240,20 @@ public class BidListControllerTests {
 
     @Test
     @WithMockUser(username = "user", password = "test")
+    public void testShowDeleteForm() throws Exception {
+
+        String idString = "1";
+        BidList bidList = new BidList();
+        bidList.setBidlistId(Integer.parseInt(idString));
+        bidList.setAccount("account");
+        Optional<BidList> optionalBidList = Optional.of(bidList);
+
+        when(bidListRepository.findById(Integer.parseInt(idString))).thenReturn(optionalBidList);
+        mockMvc.perform(get("/bidList/delete/{id}", idString)).andExpect(status().isOk());
+    }
+
+    @Test
+    @WithMockUser(username = "user", password = "test")
     public void testDeleteBidList() throws Exception {
 
         String idString = "1";
@@ -249,7 +263,8 @@ public class BidListControllerTests {
         Optional<BidList> optionalBidList = Optional.of(bidList);
 
         when(bidListRepository.findById(Integer.parseInt(idString))).thenReturn(optionalBidList);
-        mockMvc.perform(get("/bidList/delete/{id}", idString)).andExpect(status().isFound());
+        mockMvc.perform(delete("/bidList/delete/{id}", idString).with(csrf()))
+                .andExpect(redirectedUrl("/bidList/list"));
     }
 
 }

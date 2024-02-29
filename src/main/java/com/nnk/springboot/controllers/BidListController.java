@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -108,7 +110,7 @@ public class BidListController {
         return "bidList/update";
     }
 
-    @PostMapping("/bidList/update/{id}")
+    @PutMapping("/bidList/update/{id}")
     public String updateBid(@PathVariable("id") Integer id, @Valid BidList bidList,
             BindingResult result, Model model, HttpServletResponse response,
             @RequestParam String bidListDateString, @RequestParam String creationDateString,
@@ -140,6 +142,19 @@ public class BidListController {
     }
 
     @GetMapping("/bidList/delete/{id}")
+    public String showDeleteForm(@PathVariable("id") Integer id, Model model, HttpServletRequest request,
+            HttpServletResponse response) {
+        BidList bidList = bidListRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+        model.addAttribute("bidList", bidList);
+
+        String messageLoggerInfo = loggerApi.loggerInfoController(request, response, "");
+        LOGGER.info(messageLoggerInfo);
+
+        return "bidList/delete";
+    }
+
+    @DeleteMapping("/bidList/delete/{id}")
     public String deleteBid(@PathVariable("id") Integer id, Model model, HttpServletRequest request,
             HttpServletResponse response) {
         BidList bidList = bidListRepository.findById(id)

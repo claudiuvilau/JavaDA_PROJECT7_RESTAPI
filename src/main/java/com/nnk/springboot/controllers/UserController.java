@@ -7,9 +7,11 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.nnk.springboot.domain.Users;
@@ -114,7 +116,7 @@ public class UserController {
     }
 
     @Secured("ADMIN")
-    @PostMapping("/user/update/{id}")
+    @PutMapping("/user/update/{id}")
     public String updateUser(@PathVariable("id") Integer id, @Valid Users user,
             BindingResult result, Model model, HttpServletRequest request, HttpServletResponse response) {
         if (result.hasErrors()) {
@@ -149,6 +151,21 @@ public class UserController {
 
     @Secured("ADMIN")
     @GetMapping("/user/delete/{id}")
+    public String showDeleteForm(@PathVariable("id") Integer id, Model model, HttpServletRequest request,
+            HttpServletResponse response) {
+        Users users = userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+        users.setPassword("");
+        model.addAttribute("users", users);
+
+        String messageLoggerInfo = loggerApi.loggerInfoController(request, response, "");
+        LOGGER.info(messageLoggerInfo);
+
+        return "user/delete";
+    }
+
+    @Secured("ADMIN")
+    @DeleteMapping("/user/delete/{id}")
     public String deleteUser(@PathVariable("id") Integer id, Model model, HttpServletRequest request,
             HttpServletResponse response) {
         Users user = userRepository.findById(id)
