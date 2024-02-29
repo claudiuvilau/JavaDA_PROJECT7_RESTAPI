@@ -139,11 +139,11 @@ public class UserControllerTests {
     public void testUpdateUser() throws Exception {
 
         String idString = "1";
-        mockMvc.perform(post("/user/update/{id}", idString).with(csrf())
+        mockMvc.perform(put("/user/update/{id}", idString).with(csrf())
                 .param("username", "UserName")
                 .param("password", "Password10*")
                 .param("fullname", "Last Name User")
-                .param("role", "ADMIN")).andExpect(status().isFound()); // respose 302
+                .param("role", "ADMIN")).andExpect(redirectedUrl("/user/list"));
     }
 
     @Test
@@ -152,11 +152,28 @@ public class UserControllerTests {
 
         // One parameter missing => error or all parameters missing => error
         String idString = "1";
-        mockMvc.perform(post("/user/update/{id}", idString).with(csrf())
+        mockMvc.perform(put("/user/update/{id}", idString).with(csrf())
                 .param("username", "UserName")
                 // .param("password", "password")
                 .param("fullname", "Last Name User")
                 .param("role", "ADMIN")).andExpect(status().isBadRequest()); // respose 400
+    }
+
+    @Test
+    @WithMockUser(username = "user", password = "test", authorities = "ADMIN")
+    public void testShowDeleteForm() throws Exception {
+
+        String idString = "1";
+        Users userApi = new Users();
+        userApi.setId(Integer.parseInt(idString));
+        userApi.setFullname("Last Name User");
+        userApi.setUsername("UserName");
+        userApi.setRole("ADMIN");
+        userApi.setPassword("password");
+        Optional<Users> optionalUser = Optional.of(userApi);
+
+        when(userRepository.findById(Integer.parseInt(idString))).thenReturn(optionalUser);
+        mockMvc.perform(get("/user/delete/{id}", idString)).andExpect(status().isOk());
     }
 
     @Test
@@ -173,7 +190,7 @@ public class UserControllerTests {
         Optional<Users> optionalUser = Optional.of(userApi);
 
         when(userRepository.findById(Integer.parseInt(idString))).thenReturn(optionalUser);
-        mockMvc.perform(get("/user/delete/{id}", idString)).andExpect(status().isFound());
+        mockMvc.perform(delete("/user/delete/{id}", idString).with(csrf())).andExpect(redirectedUrl("/user/list"));
     }
 
 }

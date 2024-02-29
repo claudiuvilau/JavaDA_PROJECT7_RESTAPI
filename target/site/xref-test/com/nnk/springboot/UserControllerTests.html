@@ -149,11 +149,11 @@
 <a name="139" href="#139">139</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testUpdateUser() <strong class="jxr_keyword">throws</strong> Exception {
 <a name="140" href="#140">140</a> 
 <a name="141" href="#141">141</a>         String idString = <span class="jxr_string">"1"</span>;
-<a name="142" href="#142">142</a>         mockMvc.perform(post(<span class="jxr_string">"/user/update/{id}"</span>, idString).with(csrf())
+<a name="142" href="#142">142</a>         mockMvc.perform(put(<span class="jxr_string">"/user/update/{id}"</span>, idString).with(csrf())
 <a name="143" href="#143">143</a>                 .param(<span class="jxr_string">"username"</span>, <span class="jxr_string">"UserName"</span>)
 <a name="144" href="#144">144</a>                 .param(<span class="jxr_string">"password"</span>, <span class="jxr_string">"Password10*"</span>)
 <a name="145" href="#145">145</a>                 .param(<span class="jxr_string">"fullname"</span>, <span class="jxr_string">"Last Name User"</span>)
-<a name="146" href="#146">146</a>                 .param(<span class="jxr_string">"role"</span>, <span class="jxr_string">"ADMIN"</span>)).andExpect(status().isFound()); <em class="jxr_comment">// respose 302</em>
+<a name="146" href="#146">146</a>                 .param(<span class="jxr_string">"role"</span>, <span class="jxr_string">"ADMIN"</span>)).andExpect(redirectedUrl(<span class="jxr_string">"/user/list"</span>));
 <a name="147" href="#147">147</a>     }
 <a name="148" href="#148">148</a> 
 <a name="149" href="#149">149</a>     @Test
@@ -162,7 +162,7 @@
 <a name="152" href="#152">152</a> 
 <a name="153" href="#153">153</a>         <em class="jxr_comment">// One parameter missing =&gt; error or all parameters missing =&gt; error</em>
 <a name="154" href="#154">154</a>         String idString = <span class="jxr_string">"1"</span>;
-<a name="155" href="#155">155</a>         mockMvc.perform(post(<span class="jxr_string">"/user/update/{id}"</span>, idString).with(csrf())
+<a name="155" href="#155">155</a>         mockMvc.perform(put(<span class="jxr_string">"/user/update/{id}"</span>, idString).with(csrf())
 <a name="156" href="#156">156</a>                 .param(<span class="jxr_string">"username"</span>, <span class="jxr_string">"UserName"</span>)
 <a name="157" href="#157">157</a>                 <em class="jxr_comment">// .param("password", "password")</em>
 <a name="158" href="#158">158</a>                 .param(<span class="jxr_string">"fullname"</span>, <span class="jxr_string">"Last Name User"</span>)
@@ -171,7 +171,7 @@
 <a name="161" href="#161">161</a> 
 <a name="162" href="#162">162</a>     @Test
 <a name="163" href="#163">163</a>     @WithMockUser(username = <span class="jxr_string">"user"</span>, password = <span class="jxr_string">"test"</span>, authorities = <span class="jxr_string">"ADMIN"</span>)
-<a name="164" href="#164">164</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testDeleteUser() <strong class="jxr_keyword">throws</strong> Exception {
+<a name="164" href="#164">164</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testShowDeleteForm() <strong class="jxr_keyword">throws</strong> Exception {
 <a name="165" href="#165">165</a> 
 <a name="166" href="#166">166</a>         String idString = <span class="jxr_string">"1"</span>;
 <a name="167" href="#167">167</a>         Users userApi = <strong class="jxr_keyword">new</strong> Users();
@@ -183,10 +183,27 @@
 <a name="173" href="#173">173</a>         Optional&lt;Users&gt; optionalUser = Optional.of(userApi);
 <a name="174" href="#174">174</a> 
 <a name="175" href="#175">175</a>         when(userRepository.findById(Integer.parseInt(idString))).thenReturn(optionalUser);
-<a name="176" href="#176">176</a>         mockMvc.perform(get(<span class="jxr_string">"/user/delete/{id}"</span>, idString)).andExpect(status().isFound());
+<a name="176" href="#176">176</a>         mockMvc.perform(get(<span class="jxr_string">"/user/delete/{id}"</span>, idString)).andExpect(status().isOk());
 <a name="177" href="#177">177</a>     }
 <a name="178" href="#178">178</a> 
-<a name="179" href="#179">179</a> }
+<a name="179" href="#179">179</a>     @Test
+<a name="180" href="#180">180</a>     @WithMockUser(username = <span class="jxr_string">"user"</span>, password = <span class="jxr_string">"test"</span>, authorities = <span class="jxr_string">"ADMIN"</span>)
+<a name="181" href="#181">181</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testDeleteUser() <strong class="jxr_keyword">throws</strong> Exception {
+<a name="182" href="#182">182</a> 
+<a name="183" href="#183">183</a>         String idString = <span class="jxr_string">"1"</span>;
+<a name="184" href="#184">184</a>         Users userApi = <strong class="jxr_keyword">new</strong> Users();
+<a name="185" href="#185">185</a>         userApi.setId(Integer.parseInt(idString));
+<a name="186" href="#186">186</a>         userApi.setFullname(<span class="jxr_string">"Last Name User"</span>);
+<a name="187" href="#187">187</a>         userApi.setUsername(<span class="jxr_string">"UserName"</span>);
+<a name="188" href="#188">188</a>         userApi.setRole(<span class="jxr_string">"ADMIN"</span>);
+<a name="189" href="#189">189</a>         userApi.setPassword(<span class="jxr_string">"password"</span>);
+<a name="190" href="#190">190</a>         Optional&lt;Users&gt; optionalUser = Optional.of(userApi);
+<a name="191" href="#191">191</a> 
+<a name="192" href="#192">192</a>         when(userRepository.findById(Integer.parseInt(idString))).thenReturn(optionalUser);
+<a name="193" href="#193">193</a>         mockMvc.perform(delete(<span class="jxr_string">"/user/delete/{id}"</span>, idString).with(csrf())).andExpect(redirectedUrl(<span class="jxr_string">"/user/list"</span>));
+<a name="194" href="#194">194</a>     }
+<a name="195" href="#195">195</a> 
+<a name="196" href="#196">196</a> }
 </pre>
 <hr/><div id="footer">This page was automatically generated by <a href="http://maven.apache.org/">Maven</a></div></body>
 </html>
