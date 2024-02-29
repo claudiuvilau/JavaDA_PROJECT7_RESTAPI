@@ -1,0 +1,111 @@
+2024-02-28 22:50:32 [background-preinit] INFO  o.h.v.i.u.Version                                  - HV000001: Hibernate Validator 8.0.1.Final
+2024-02-28 22:50:32 [main] INFO  c.n.s.Application                                  - Starting Application using Java 17.0.9 with PID 11456 (C:\Users\kls_k\OneDrive\Claudiu - hors connexion\WorkJavaVisualCode\CompletBackend\JavaDA_PROJECT7_RESTAPI\Poseiden-skeleton\target\classes started by kls_k in C:\Users\kls_k\OneDrive\Claudiu - hors connexion\WorkJavaVisualCode\CompletBackend\JavaDA_PROJECT7_RESTAPI\Poseiden-skeleton\src\main\resources)
+2024-02-28 22:50:32 [main] INFO  c.n.s.Application                                  - No active profile set, falling back to 1 default profile: "default"
+2024-02-28 22:50:33 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-02-28 22:50:33 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate          - Finished Spring Data repository scanning in 74 ms. Found 6 JPA repository interfaces.
+2024-02-28 22:50:34 [main] INFO  o.s.b.w.e.t.TomcatWebServer                        - Tomcat initialized with port 8080 (http)
+2024-02-28 22:50:34 [main] INFO  o.a.c.h.Http11NioProtocol                          - Initializing ProtocolHandler ["http-nio-8080"]
+2024-02-28 22:50:34 [main] INFO  o.a.c.c.StandardService                            - Starting service [Tomcat]
+2024-02-28 22:50:34 [main] INFO  o.a.c.c.StandardEngine                             - Starting Servlet engine: [Apache Tomcat/10.1.19]
+2024-02-28 22:50:34 [main] INFO  o.a.c.c.C.[.[.[/]                                  - Initializing Spring embedded WebApplicationContext
+2024-02-28 22:50:34 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext     - Root WebApplicationContext: initialization completed in 1809 ms
+2024-02-28 22:50:34 [main] INFO  c.z.h.HikariDataSource                             - HikariPool-1 - Starting...
+2024-02-28 22:50:34 [main] INFO  c.z.h.p.HikariPool                                 - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@23c7cb18
+2024-02-28 22:50:34 [main] INFO  c.z.h.HikariDataSource                             - HikariPool-1 - Start completed.
+2024-02-28 22:50:34 [main] INFO  o.h.j.i.u.LogHelper                                - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-02-28 22:50:34 [main] INFO  o.h.Version                                        - HHH000412: Hibernate ORM core version 6.4.4.Final
+2024-02-28 22:50:34 [main] INFO  o.h.c.i.RegionFactoryInitiator                     - HHH000026: Second-level cache disabled
+2024-02-28 22:50:35 [main] INFO  o.s.o.j.p.SpringPersistenceUnitInfo                - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-02-28 22:50:35 [main] WARN  o.h.o.deprecation                                  - HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-02-28 22:50:36 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator                 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-02-28 22:50:36 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean     - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-02-28 22:50:36 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-02-28 22:50:37 [main] INFO  o.s.s.w.DefaultSecurityFilterChain                 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@74597c37, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@cd9ce76, org.springframework.security.web.context.SecurityContextHolderFilter@64faf3d, org.springframework.security.web.header.HeaderWriterFilter@797c67c, org.springframework.web.filter.CorsFilter@421c057a, org.springframework.security.web.csrf.CsrfFilter@7d816d32, org.springframework.security.web.authentication.logout.LogoutFilter@1cecd0a9, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@740530b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7fe40b9f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1f41f259, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@16448827, org.springframework.security.web.access.ExceptionTranslationFilter@3431cb1f, org.springframework.security.web.access.intercept.AuthorizationFilter@58dd1d0c]
+2024-02-28 22:50:37 [main] INFO  o.a.c.h.Http11NioProtocol                          - Starting ProtocolHandler ["http-nio-8080"]
+2024-02-28 22:50:37 [main] INFO  o.s.b.w.e.t.TomcatWebServer                        - Tomcat started on port 8080 (http) with context path ''
+2024-02-28 22:50:37 [main] INFO  c.n.s.Application                                  - Started Application in 5.854 seconds (process running for 9.628)
+2024-02-28 22:52:16 [http-nio-8080-exec-2] INFO  o.a.c.c.C.[.[.[/]                                  - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-02-28 22:52:16 [http-nio-8080-exec-2] INFO  o.s.w.s.DispatcherServlet                          - Initializing Servlet 'dispatcherServlet'
+2024-02-28 22:52:16 [http-nio-8080-exec-2] INFO  o.s.w.s.DispatcherServlet                          - Completed initialization in 4 ms
+2024-02-28 22:52:16 [http-nio-8080-exec-3] INFO  c.n.s.c.LoginController                            - URI active : /login Code response : 200 OK
+2024-02-28 22:52:17 [http-nio-8080-exec-7] INFO  c.n.s.c.LoginController                            - URI active : /login Code response : 200 OK
+2024-02-28 22:52:25 [http-nio-8080-exec-4] DEBUG c.n.s.s.UsersService                               - Request URL: http://localhost:8080/app/login List of users is : [com.nnk.springboot.domain.Users@58e5bc66, com.nnk.springboot.domain.Users@208fb16, com.nnk.springboot.domain.Users@2f8e19b6, com.nnk.springboot.domain.Users@46a0d291, com.nnk.springboot.domain.Users@5841c7aa]
+2024-02-28 22:52:25 [http-nio-8080-exec-4] WARN  c.n.s.s.MyUserDetailService                        - User name : user not found.
+2024-02-28 22:52:25 [http-nio-8080-exec-6] INFO  c.n.s.c.LoginController                            - URI active : /login Code response : 200 OK
+2024-02-28 22:52:25 [http-nio-8080-exec-5] INFO  c.n.s.c.LoginController                            - URI active : /login Code response : 200 OK
+2024-02-28 22:52:30 [http-nio-8080-exec-2] DEBUG c.n.s.s.UsersService                               - Request URL: http://localhost:8080/app/login List of users is : [com.nnk.springboot.domain.Users@45b8511, com.nnk.springboot.domain.Users@205c382f, com.nnk.springboot.domain.Users@42f2513c, com.nnk.springboot.domain.Users@5e3ea3d0, com.nnk.springboot.domain.Users@615c60b]
+2024-02-28 22:52:30 [http-nio-8080-exec-2] DEBUG c.n.s.s.UsersService                               - Request URL: http://localhost:8080/app/login User name is : claudiu User demo
+2024-02-28 22:52:30 [http-nio-8080-exec-2] DEBUG c.n.s.s.MyUserDetailService                        - Request URL: http://localhost:8080/app/login User Name is : claudiu
+2024-02-28 22:52:30 [http-nio-8080-exec-2] DEBUG c.n.s.s.MyUserDetailService                        - Request URL: http://localhost:8080/app/login The user name : claudiu User demo has the authoritie USER
+2024-02-28 22:52:31 [http-nio-8080-exec-3] INFO  c.n.s.c.LoginController                            - User name : claudiu
+Request Method: <[GET]> /app/login/ok
+Request URL: http://localhost:8080/app/login/ok
+Response Code :  200 OK
+2024-02-28 22:52:38 [http-nio-8080-exec-9] INFO  c.n.s.c.LoginController                            - URI active : /login Code response : 200 OK
+2024-02-28 22:52:40 [http-nio-8080-exec-2] INFO  c.n.s.c.LoginController                            - URI active : /login Code response : 200 OK
+2024-02-28 22:52:40 [http-nio-8080-exec-8] INFO  c.n.s.c.LoginController                            - URI active : /login Code response : 200 OK
+2024-02-28 22:52:41 [http-nio-8080-exec-4] INFO  c.n.s.c.LoginController                            - URI active : /login Code response : 200 OK
+2024-02-28 22:52:44 [http-nio-8080-exec-9] INFO  c.n.s.c.LoginController                            - URI active : /login Code response : 200 OK
+2024-02-28 22:52:45 [http-nio-8080-exec-5] INFO  c.n.s.c.LoginController                            - URI active : /login Code response : 200 OK
+2024-02-28 22:52:45 [http-nio-8080-exec-3] INFO  c.n.s.c.LoginController                            - URI active : /login Code response : 200 OK
+2024-02-28 22:52:45 [http-nio-8080-exec-8] INFO  c.n.s.c.LoginController                            - URI active : /login Code response : 200 OK
+2024-02-28 22:52:45 [http-nio-8080-exec-4] INFO  c.n.s.c.LoginController                            - URI active : /login Code response : 200 OK
+2024-02-28 22:52:46 [http-nio-8080-exec-9] INFO  c.n.s.c.LoginController                            - URI active : /login Code response : 200 OK
+2024-02-28 22:52:51 [http-nio-8080-exec-5] DEBUG c.n.s.s.UsersService                               - Request URL: http://localhost:8080/app/login List of users is : [com.nnk.springboot.domain.Users@2e5ef370, com.nnk.springboot.domain.Users@7f363b49, com.nnk.springboot.domain.Users@232b91cd, com.nnk.springboot.domain.Users@6c4612cc, com.nnk.springboot.domain.Users@422638d]
+2024-02-28 22:52:51 [http-nio-8080-exec-5] DEBUG c.n.s.s.UsersService                               - Request URL: http://localhost:8080/app/login User name is : claudiu User demo
+2024-02-28 22:52:51 [http-nio-8080-exec-5] DEBUG c.n.s.s.MyUserDetailService                        - Request URL: http://localhost:8080/app/login User Name is : claudiu
+2024-02-28 22:52:51 [http-nio-8080-exec-5] DEBUG c.n.s.s.MyUserDetailService                        - Request URL: http://localhost:8080/app/login The user name : claudiu User demo has the authoritie USER
+2024-02-28 22:52:51 [http-nio-8080-exec-2] INFO  c.n.s.c.LoginController                            - User name : claudiu
+Request Method: <[GET]> /app/login/ok
+Request URL: http://localhost:8080/app/login/ok
+Response Code :  200 OK
+2024-02-28 22:52:57 [http-nio-8080-exec-8] INFO  c.n.s.c.LoginController                            - User name : claudiu
+Request Method: <[GET]> /app/login/ok
+Request URL: http://localhost:8080/app/login/ok
+Response Code :  200 OK
+2024-02-28 22:52:58 [http-nio-8080-exec-4] INFO  c.n.s.c.LoginController                            - URI active : /login Code response : 200 OK
+2024-02-28 22:53:00 [http-nio-8080-exec-9] INFO  c.n.s.c.LoginController                            - URI active : /login Code response : 200 OK
+2024-02-28 22:53:00 [http-nio-8080-exec-5] INFO  c.n.s.c.LoginController                            - URI active : /login Code response : 200 OK
+2024-02-28 22:53:01 [http-nio-8080-exec-3] INFO  c.n.s.c.LoginController                            - User name : claudiu
+Request Method: <[GET]> /app/login/ok
+Request URL: http://localhost:8080/app/login/ok
+Response Code :  200 OK
+2024-02-28 22:53:04 [http-nio-8080-exec-6] INFO  c.n.s.c.LoginController                            - URI active : /login Code response : 200 OK
+2024-02-28 22:53:05 [http-nio-8080-exec-5] INFO  c.n.s.c.LoginController                            - URI active : /login Code response : 200 OK
+2024-02-28 22:53:05 [http-nio-8080-exec-1] INFO  c.n.s.c.LoginController                            - URI active : /login Code response : 200 OK
+2024-02-28 22:53:05 [http-nio-8080-exec-7] INFO  c.n.s.c.LoginController                            - URI active : /login Code response : 200 OK
+2024-02-28 22:53:06 [http-nio-8080-exec-6] INFO  c.n.s.c.LoginController                            - URI active : /login Code response : 200 OK
+2024-02-28 22:53:11 [http-nio-8080-exec-10] DEBUG c.n.s.s.UsersService                               - Request URL: http://localhost:8080/app/login List of users is : [com.nnk.springboot.domain.Users@36701f96, com.nnk.springboot.domain.Users@55b528d7, com.nnk.springboot.domain.Users@37394d00, com.nnk.springboot.domain.Users@1b4ec77a, com.nnk.springboot.domain.Users@2d74f72a]
+2024-02-28 22:53:11 [http-nio-8080-exec-10] DEBUG c.n.s.s.UsersService                               - Request URL: http://localhost:8080/app/login User name is : claudiu User demo
+2024-02-28 22:53:11 [http-nio-8080-exec-10] DEBUG c.n.s.s.MyUserDetailService                        - Request URL: http://localhost:8080/app/login User Name is : claudiu
+2024-02-28 22:53:11 [http-nio-8080-exec-10] DEBUG c.n.s.s.MyUserDetailService                        - Request URL: http://localhost:8080/app/login The user name : claudiu User demo has the authoritie USER
+2024-02-28 22:53:11 [http-nio-8080-exec-5] INFO  c.n.s.c.LoginController                            - User name : claudiu
+Request Method: <[GET]> /app/login/ok
+Request URL: http://localhost:8080/app/login/ok
+Response Code :  200 OK
+2024-02-28 22:53:13 [http-nio-8080-exec-3] INFO  c.n.s.c.LoginController                            - URI active : /login Code response : 200 OK
+2024-02-28 22:53:18 [http-nio-8080-exec-8] DEBUG c.n.s.s.UsersService                               - Request URL: http://localhost:8080/app/login List of users is : [com.nnk.springboot.domain.Users@25bbab4d, com.nnk.springboot.domain.Users@254070b5, com.nnk.springboot.domain.Users@59b36c92, com.nnk.springboot.domain.Users@12c55cf4, com.nnk.springboot.domain.Users@6a5c7c22]
+2024-02-28 22:53:18 [http-nio-8080-exec-8] DEBUG c.n.s.s.UsersService                               - Request URL: http://localhost:8080/app/login User name is : admin Administrator demo9
+2024-02-28 22:53:18 [http-nio-8080-exec-8] DEBUG c.n.s.s.MyUserDetailService                        - Request URL: http://localhost:8080/app/login User Name is : admin
+2024-02-28 22:53:18 [http-nio-8080-exec-8] DEBUG c.n.s.s.MyUserDetailService                        - Request URL: http://localhost:8080/app/login The user name : admin Administrator demo9 has the authoritie ADMIN
+2024-02-28 22:53:18 [http-nio-8080-exec-7] INFO  c.n.s.c.LoginController                            - User name : admin
+Request Method: <[GET]> /app/login/ok
+Request URL: http://localhost:8080/app/login/ok
+Response Code :  200 OK
+2024-02-28 22:53:20 [http-nio-8080-exec-6] INFO  c.n.s.c.LoginController                            - User name : admin
+Request Method: <[GET]> /app/secure/article-details
+Request URL: http://localhost:8080/app/secure/article-details
+Response Code :  200 OK
+2024-02-28 22:53:24 [http-nio-8080-exec-10] INFO  c.n.s.c.UserController                             - User name : admin
+Request Method: <[GET]> /user/add
+Request URL: http://localhost:8080/user/add
+Response Code :  200 OK
+2024-02-28 22:53:31 [http-nio-8080-exec-2] INFO  c.n.s.s.ValidInput                                 - Le mot de passe ne respecte pas les consignes
+2024-02-28 22:53:31 [http-nio-8080-exec-2] INFO  c.n.s.c.UserController                             - User name : admin
+Request Method: <[POST]> /user/validate
+Request URL: http://localhost:8080/user/validate
+Response Code :  200 OK
+2024-02-28 22:53:36 [http-nio-8080-exec-8] INFO  c.n.s.c.UserController                             - User name : admin
+Request Method: <[GET]> /user/list
+Request URL: http://localhost:8080/user/list
+Response Code :  200 OK
