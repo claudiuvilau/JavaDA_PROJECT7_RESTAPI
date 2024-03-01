@@ -141,7 +141,7 @@
 <a name="131" href="#131">131</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testUpdateTrade() <strong class="jxr_keyword">throws</strong> Exception {
 <a name="132" href="#132">132</a> 
 <a name="133" href="#133">133</a>         String idString = <span class="jxr_string">"1"</span>;
-<a name="134" href="#134">134</a>         mockMvc.perform(post(<span class="jxr_string">"/trade/update/{id}"</span>, idString).with(csrf())
+<a name="134" href="#134">134</a>         mockMvc.perform(put(<span class="jxr_string">"/trade/update/{id}"</span>, idString).with(csrf())
 <a name="135" href="#135">135</a>                 .param(<span class="jxr_string">"tradeDateString"</span>, <span class="jxr_string">"2023-07-20T22:20"</span>)
 <a name="136" href="#136">136</a>                 .param(<span class="jxr_string">"creationDateString"</span>, <span class="jxr_string">"2023-07-21T22:20"</span>)
 <a name="137" href="#137">137</a>                 .param(<span class="jxr_string">"revisionDateString"</span>, <span class="jxr_string">"2023-07-22T22:20"</span>)
@@ -170,7 +170,7 @@
 <a name="160" href="#160">160</a> 
 <a name="161" href="#161">161</a>         <em class="jxr_comment">// Type date tradeDate is error =&gt; has error</em>
 <a name="162" href="#162">162</a>         String idString = <span class="jxr_string">"1"</span>;
-<a name="163" href="#163">163</a>         mockMvc.perform(post(<span class="jxr_string">"/trade/update/{id}"</span>, idString).with(
+<a name="163" href="#163">163</a>         mockMvc.perform(put(<span class="jxr_string">"/trade/update/{id}"</span>, idString).with(
 <a name="164" href="#164">164</a>                 csrf())
 <a name="165" href="#165">165</a>                 .param(<span class="jxr_string">"tradeDateString"</span>, <span class="jxr_string">"2023-07-20T22:20"</span>)
 <a name="166" href="#166">166</a>                 .param(<span class="jxr_string">"creationDateString"</span>, <span class="jxr_string">"2023-07-21T22:20"</span>)
@@ -182,7 +182,7 @@
 <a name="172" href="#172">172</a> 
 <a name="173" href="#173">173</a>     @Test
 <a name="174" href="#174">174</a>     @WithMockUser(username = <span class="jxr_string">"user"</span>, password = <span class="jxr_string">"test"</span>)
-<a name="175" href="#175">175</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testDeleteTrade() <strong class="jxr_keyword">throws</strong> Exception {
+<a name="175" href="#175">175</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testShowDeleteForm() <strong class="jxr_keyword">throws</strong> Exception {
 <a name="176" href="#176">176</a> 
 <a name="177" href="#177">177</a>         String idString = <span class="jxr_string">"1"</span>;
 <a name="178" href="#178">178</a>         Trade trade = <strong class="jxr_keyword">new</strong> Trade();
@@ -191,10 +191,24 @@
 <a name="181" href="#181">181</a>         Optional&lt;Trade&gt; optionalTrade = Optional.of(trade);
 <a name="182" href="#182">182</a> 
 <a name="183" href="#183">183</a>         when(tradeRepository.findById(Integer.parseInt(idString))).thenReturn(optionalTrade);
-<a name="184" href="#184">184</a>         mockMvc.perform(get(<span class="jxr_string">"/trade/delete/{id}"</span>, idString)).andExpect(status().isFound());
+<a name="184" href="#184">184</a>         mockMvc.perform(get(<span class="jxr_string">"/trade/delete/{id}"</span>, idString)).andExpect(status().isOk());
 <a name="185" href="#185">185</a>     }
 <a name="186" href="#186">186</a> 
-<a name="187" href="#187">187</a> }
+<a name="187" href="#187">187</a>     @Test
+<a name="188" href="#188">188</a>     @WithMockUser(username = <span class="jxr_string">"user"</span>, password = <span class="jxr_string">"test"</span>)
+<a name="189" href="#189">189</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testDeleteTrade() <strong class="jxr_keyword">throws</strong> Exception {
+<a name="190" href="#190">190</a> 
+<a name="191" href="#191">191</a>         String idString = <span class="jxr_string">"1"</span>;
+<a name="192" href="#192">192</a>         Trade trade = <strong class="jxr_keyword">new</strong> Trade();
+<a name="193" href="#193">193</a>         trade.setTradeId(Integer.parseInt(idString));
+<a name="194" href="#194">194</a>         trade.setAccount(<span class="jxr_string">"account"</span>);
+<a name="195" href="#195">195</a>         Optional&lt;Trade&gt; optionalTrade = Optional.of(trade);
+<a name="196" href="#196">196</a> 
+<a name="197" href="#197">197</a>         when(tradeRepository.findById(Integer.parseInt(idString))).thenReturn(optionalTrade);
+<a name="198" href="#198">198</a>         mockMvc.perform(delete(<span class="jxr_string">"/trade/delete/{id}"</span>, idString).with(csrf())).andExpect(redirectedUrl(<span class="jxr_string">"/trade/list"</span>));
+<a name="199" href="#199">199</a>     }
+<a name="200" href="#200">200</a> 
+<a name="201" href="#201">201</a> }
 </pre>
 <hr/><div id="footer">This page was automatically generated by <a href="http://maven.apache.org/">Maven</a></div></body>
 </html>

@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.nnk.springboot.domain.RuleName;
@@ -103,7 +105,7 @@ public class RuleNameController {
         return "ruleName/update";
     }
 
-    @PostMapping("/ruleName/update/{id}")
+    @PutMapping("/ruleName/update/{id}")
     public String updateRuleName(@PathVariable("id") Integer id, @Valid RuleName ruleName,
             BindingResult result, Model model, HttpServletRequest request, HttpServletResponse response) {
         if (result.hasErrors()) {
@@ -135,6 +137,19 @@ public class RuleNameController {
     }
 
     @GetMapping("/ruleName/delete/{id}")
+    public String showDeleteForm(@PathVariable("id") Integer id, Model model, HttpServletRequest request,
+            HttpServletResponse response) {
+        RuleName ruleName = ruleNameRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+        model.addAttribute("ruleName", ruleName);
+
+        String messageLoggerInfo = loggerApi.loggerInfoController(request, response, "");
+        LOGGER.info(messageLoggerInfo);
+
+        return "ruleName/delete";
+    }
+
+    @DeleteMapping("/ruleName/delete/{id}")
     public String deleteRuleName(@PathVariable("id") Integer id, Model model, HttpServletRequest request,
             HttpServletResponse response) {
         RuleName ruleName = ruleNameRepository.findById(id)

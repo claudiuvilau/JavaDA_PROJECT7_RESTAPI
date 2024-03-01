@@ -131,7 +131,7 @@ public class TradeControllerTests {
     public void testUpdateTrade() throws Exception {
 
         String idString = "1";
-        mockMvc.perform(post("/trade/update/{id}", idString).with(csrf())
+        mockMvc.perform(put("/trade/update/{id}", idString).with(csrf())
                 .param("tradeDateString", "2023-07-20T22:20")
                 .param("creationDateString", "2023-07-21T22:20")
                 .param("revisionDateString", "2023-07-22T22:20")
@@ -160,7 +160,7 @@ public class TradeControllerTests {
 
         // Type date tradeDate is error => has error
         String idString = "1";
-        mockMvc.perform(post("/trade/update/{id}", idString).with(
+        mockMvc.perform(put("/trade/update/{id}", idString).with(
                 csrf())
                 .param("tradeDateString", "2023-07-20T22:20")
                 .param("creationDateString", "2023-07-21T22:20")
@@ -168,6 +168,20 @@ public class TradeControllerTests {
                 .param("tradeDate", "2023-07-20T22:20"))
                 .andDo(print())
                 .andExpect(status().isBadRequest()); // respose 400
+    }
+
+    @Test
+    @WithMockUser(username = "user", password = "test")
+    public void testShowDeleteForm() throws Exception {
+
+        String idString = "1";
+        Trade trade = new Trade();
+        trade.setTradeId(Integer.parseInt(idString));
+        trade.setAccount("account");
+        Optional<Trade> optionalTrade = Optional.of(trade);
+
+        when(tradeRepository.findById(Integer.parseInt(idString))).thenReturn(optionalTrade);
+        mockMvc.perform(get("/trade/delete/{id}", idString)).andExpect(status().isOk());
     }
 
     @Test
@@ -181,7 +195,7 @@ public class TradeControllerTests {
         Optional<Trade> optionalTrade = Optional.of(trade);
 
         when(tradeRepository.findById(Integer.parseInt(idString))).thenReturn(optionalTrade);
-        mockMvc.perform(get("/trade/delete/{id}", idString)).andExpect(status().isFound());
+        mockMvc.perform(delete("/trade/delete/{id}", idString).with(csrf())).andExpect(redirectedUrl("/trade/list"));
     }
 
 }

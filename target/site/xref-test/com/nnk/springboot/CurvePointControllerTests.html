@@ -141,7 +141,7 @@
 <a name="131" href="#131">131</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testUpdateCurvePoint() <strong class="jxr_keyword">throws</strong> Exception {
 <a name="132" href="#132">132</a> 
 <a name="133" href="#133">133</a>         String idString = <span class="jxr_string">"1"</span>;
-<a name="134" href="#134">134</a>         mockMvc.perform(post(<span class="jxr_string">"/curvePoint/update/{id}"</span>, idString).with(csrf())
+<a name="134" href="#134">134</a>         mockMvc.perform(put(<span class="jxr_string">"/curvePoint/update/{id}"</span>, idString).with(csrf())
 <a name="135" href="#135">135</a>                 .param(<span class="jxr_string">"asOfDateString"</span>, <span class="jxr_string">"2023-07-20T22:20"</span>)
 <a name="136" href="#136">136</a>                 .param(<span class="jxr_string">"curveId"</span>, <span class="jxr_string">"1"</span>)
 <a name="137" href="#137">137</a>                 .param(<span class="jxr_string">"term"</span>, <span class="jxr_string">"2"</span>)
@@ -156,7 +156,7 @@
 <a name="146" href="#146">146</a> 
 <a name="147" href="#147">147</a>         <em class="jxr_comment">// Type integer curveId is error =&gt; has error</em>
 <a name="148" href="#148">148</a>         String idString = <span class="jxr_string">"1"</span>;
-<a name="149" href="#149">149</a>         mockMvc.perform(post(<span class="jxr_string">"/curvePoint/update/{id}"</span>, idString).with(
+<a name="149" href="#149">149</a>         mockMvc.perform(put(<span class="jxr_string">"/curvePoint/update/{id}"</span>, idString).with(
 <a name="150" href="#150">150</a>                 csrf())
 <a name="151" href="#151">151</a>                 .param(<span class="jxr_string">"asOfDateString"</span>, <span class="jxr_string">"2023-07-20T22:20"</span>)
 <a name="152" href="#152">152</a>                 .param(<span class="jxr_string">"curveId"</span>, <span class="jxr_string">"a"</span>)
@@ -169,7 +169,7 @@
 <a name="159" href="#159">159</a> 
 <a name="160" href="#160">160</a>     @Test
 <a name="161" href="#161">161</a>     @WithMockUser(username = <span class="jxr_string">"user"</span>, password = <span class="jxr_string">"test"</span>)
-<a name="162" href="#162">162</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testDeleteCurvePoint() <strong class="jxr_keyword">throws</strong> Exception {
+<a name="162" href="#162">162</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testShowDeleteForm() <strong class="jxr_keyword">throws</strong> Exception {
 <a name="163" href="#163">163</a> 
 <a name="164" href="#164">164</a>         String idString = <span class="jxr_string">"1"</span>;
 <a name="165" href="#165">165</a>         CurvePoint curvePoint = <strong class="jxr_keyword">new</strong> CurvePoint();
@@ -178,10 +178,25 @@
 <a name="168" href="#168">168</a>         Optional&lt;CurvePoint&gt; optionalCurvePoint = Optional.of(curvePoint);
 <a name="169" href="#169">169</a> 
 <a name="170" href="#170">170</a>         when(curvePointRepository.findById(Integer.parseInt(idString))).thenReturn(optionalCurvePoint);
-<a name="171" href="#171">171</a>         mockMvc.perform(get(<span class="jxr_string">"/curvePoint/delete/{id}"</span>, idString)).andExpect(status().isFound());
+<a name="171" href="#171">171</a>         mockMvc.perform(get(<span class="jxr_string">"/curvePoint/delete/{id}"</span>, idString)).andExpect(status().isOk());
 <a name="172" href="#172">172</a>     }
 <a name="173" href="#173">173</a> 
-<a name="174" href="#174">174</a> }
+<a name="174" href="#174">174</a>     @Test
+<a name="175" href="#175">175</a>     @WithMockUser(username = <span class="jxr_string">"user"</span>, password = <span class="jxr_string">"test"</span>)
+<a name="176" href="#176">176</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testDeleteCurvePoint() <strong class="jxr_keyword">throws</strong> Exception {
+<a name="177" href="#177">177</a> 
+<a name="178" href="#178">178</a>         String idString = <span class="jxr_string">"1"</span>;
+<a name="179" href="#179">179</a>         CurvePoint curvePoint = <strong class="jxr_keyword">new</strong> CurvePoint();
+<a name="180" href="#180">180</a>         curvePoint.setId(Integer.parseInt(idString));
+<a name="181" href="#181">181</a>         curvePoint.setValue(2.0);
+<a name="182" href="#182">182</a>         Optional&lt;CurvePoint&gt; optionalCurvePoint = Optional.of(curvePoint);
+<a name="183" href="#183">183</a> 
+<a name="184" href="#184">184</a>         when(curvePointRepository.findById(Integer.parseInt(idString))).thenReturn(optionalCurvePoint);
+<a name="185" href="#185">185</a>         mockMvc.perform(delete(<span class="jxr_string">"/curvePoint/delete/{id}"</span>, idString).with(csrf()))
+<a name="186" href="#186">186</a>                 .andExpect(redirectedUrl(<span class="jxr_string">"/curvePoint/list"</span>));
+<a name="187" href="#187">187</a>     }
+<a name="188" href="#188">188</a> 
+<a name="189" href="#189">189</a> }
 </pre>
 <hr/><div id="footer">This page was automatically generated by <a href="http://maven.apache.org/">Maven</a></div></body>
 </html>

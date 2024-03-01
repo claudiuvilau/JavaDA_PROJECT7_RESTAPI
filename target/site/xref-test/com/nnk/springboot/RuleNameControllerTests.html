@@ -130,7 +130,7 @@
 <a name="120" href="#120">120</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testUpdateRuleName() <strong class="jxr_keyword">throws</strong> Exception {
 <a name="121" href="#121">121</a> 
 <a name="122" href="#122">122</a>         String idString = <span class="jxr_string">"1"</span>;
-<a name="123" href="#123">123</a>         mockMvc.perform(post(<span class="jxr_string">"/ruleName/update/{id}"</span>, idString).with(csrf())
+<a name="123" href="#123">123</a>         mockMvc.perform(put(<span class="jxr_string">"/ruleName/update/{id}"</span>, idString).with(csrf())
 <a name="124" href="#124">124</a>                 .param(<span class="jxr_string">"name"</span>, <span class="jxr_string">"name"</span>)
 <a name="125" href="#125">125</a>                 .param(<span class="jxr_string">"description"</span>, <span class="jxr_string">"description"</span>)
 <a name="126" href="#126">126</a>                 .param(<span class="jxr_string">"json"</span>, <span class="jxr_string">"json"</span>)
@@ -146,7 +146,7 @@
 <a name="136" href="#136">136</a> 
 <a name="137" href="#137">137</a>         <em class="jxr_comment">// Values name is empty =&gt; has error</em>
 <a name="138" href="#138">138</a>         String idString = <span class="jxr_string">"1"</span>;
-<a name="139" href="#139">139</a>         mockMvc.perform(post(<span class="jxr_string">"/ruleName/update/{id}"</span>, idString).with(
+<a name="139" href="#139">139</a>         mockMvc.perform(put(<span class="jxr_string">"/ruleName/update/{id}"</span>, idString).with(
 <a name="140" href="#140">140</a>                 csrf())
 <a name="141" href="#141">141</a>                 .param(<span class="jxr_string">"name"</span>, <span class="jxr_string">""</span>)
 <a name="142" href="#142">142</a>                 .param(<span class="jxr_string">"description"</span>, <span class="jxr_string">"description"</span>)
@@ -160,7 +160,7 @@
 <a name="150" href="#150">150</a> 
 <a name="151" href="#151">151</a>     @Test
 <a name="152" href="#152">152</a>     @WithMockUser(username = <span class="jxr_string">"user"</span>, password = <span class="jxr_string">"test"</span>)
-<a name="153" href="#153">153</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testDeleteRuleName() <strong class="jxr_keyword">throws</strong> Exception {
+<a name="153" href="#153">153</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testShowDeleteForm() <strong class="jxr_keyword">throws</strong> Exception {
 <a name="154" href="#154">154</a> 
 <a name="155" href="#155">155</a>         String idString = <span class="jxr_string">"1"</span>;
 <a name="156" href="#156">156</a>         RuleName ruleName = <strong class="jxr_keyword">new</strong> RuleName();
@@ -169,10 +169,25 @@
 <a name="159" href="#159">159</a>         Optional&lt;RuleName&gt; optionalRuleName = Optional.of(ruleName);
 <a name="160" href="#160">160</a> 
 <a name="161" href="#161">161</a>         when(ruleNameRepository.findById(Integer.parseInt(idString))).thenReturn(optionalRuleName);
-<a name="162" href="#162">162</a>         mockMvc.perform(get(<span class="jxr_string">"/ruleName/delete/{id}"</span>, idString)).andExpect(status().isFound());
+<a name="162" href="#162">162</a>         mockMvc.perform(get(<span class="jxr_string">"/ruleName/delete/{id}"</span>, idString)).andExpect(status().isOk());
 <a name="163" href="#163">163</a>     }
 <a name="164" href="#164">164</a> 
-<a name="165" href="#165">165</a> }
+<a name="165" href="#165">165</a>     @Test
+<a name="166" href="#166">166</a>     @WithMockUser(username = <span class="jxr_string">"user"</span>, password = <span class="jxr_string">"test"</span>)
+<a name="167" href="#167">167</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testDeleteRuleName() <strong class="jxr_keyword">throws</strong> Exception {
+<a name="168" href="#168">168</a> 
+<a name="169" href="#169">169</a>         String idString = <span class="jxr_string">"1"</span>;
+<a name="170" href="#170">170</a>         RuleName ruleName = <strong class="jxr_keyword">new</strong> RuleName();
+<a name="171" href="#171">171</a>         ruleName.setId(Integer.parseInt(idString));
+<a name="172" href="#172">172</a>         ruleName.setName(<span class="jxr_string">"name"</span>);
+<a name="173" href="#173">173</a>         Optional&lt;RuleName&gt; optionalRuleName = Optional.of(ruleName);
+<a name="174" href="#174">174</a> 
+<a name="175" href="#175">175</a>         when(ruleNameRepository.findById(Integer.parseInt(idString))).thenReturn(optionalRuleName);
+<a name="176" href="#176">176</a>         mockMvc.perform(delete(<span class="jxr_string">"/ruleName/delete/{id}"</span>, idString).with(csrf()))
+<a name="177" href="#177">177</a>                 .andExpect(redirectedUrl(<span class="jxr_string">"/ruleName/list"</span>));
+<a name="178" href="#178">178</a>     }
+<a name="179" href="#179">179</a> 
+<a name="180" href="#180">180</a> }
 </pre>
 <hr/><div id="footer">This page was automatically generated by <a href="http://maven.apache.org/">Maven</a></div></body>
 </html>

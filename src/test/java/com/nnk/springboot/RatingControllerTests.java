@@ -113,7 +113,7 @@ public class RatingControllerTests {
     public void testUpdateRating() throws Exception {
 
         String idString = "1";
-        mockMvc.perform(post("/rating/update/{id}", idString).with(csrf())
+        mockMvc.perform(put("/rating/update/{id}", idString).with(csrf())
                 .param("moodysRating", "moodysRating")
                 .param("sandPRating", "sandPRating")
                 .param("fitchRating", "fitchRating")
@@ -127,7 +127,7 @@ public class RatingControllerTests {
 
         // Type orderNumber is string => has error
         String idString = "1";
-        mockMvc.perform(post("/rating/update/{id}", idString).with(
+        mockMvc.perform(put("/rating/update/{id}", idString).with(
                 csrf())
                 .param("moodysRating", "moodysRating")
                 .param("sandPRating", "sandPRating")
@@ -135,6 +135,20 @@ public class RatingControllerTests {
                 .param("orderNumber", "orderNumber"))
                 .andDo(print())
                 .andExpect(status().isBadRequest()); // respose 400
+    }
+
+    @Test
+    @WithMockUser(username = "user", password = "test")
+    public void testShowDeleteForm() throws Exception {
+
+        String idString = "1";
+        Rating rating = new Rating();
+        rating.setId(Integer.parseInt(idString));
+        rating.setFitchRating("FirtchRating");
+        Optional<Rating> optionalRating = Optional.of(rating);
+
+        when(ratingRepository.findById(Integer.parseInt(idString))).thenReturn(optionalRating);
+        mockMvc.perform(get("/rating/delete/{id}", idString)).andExpect(status().isOk());
     }
 
     @Test
@@ -148,7 +162,7 @@ public class RatingControllerTests {
         Optional<Rating> optionalRating = Optional.of(rating);
 
         when(ratingRepository.findById(Integer.parseInt(idString))).thenReturn(optionalRating);
-        mockMvc.perform(get("/rating/delete/{id}", idString)).andExpect(status().isFound());
+        mockMvc.perform(delete("/rating/delete/{id}", idString).with(csrf())).andExpect(redirectedUrl("/rating/list"));
     }
 
 }

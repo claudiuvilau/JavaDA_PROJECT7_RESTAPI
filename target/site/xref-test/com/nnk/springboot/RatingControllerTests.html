@@ -123,7 +123,7 @@
 <a name="113" href="#113">113</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testUpdateRating() <strong class="jxr_keyword">throws</strong> Exception {
 <a name="114" href="#114">114</a> 
 <a name="115" href="#115">115</a>         String idString = <span class="jxr_string">"1"</span>;
-<a name="116" href="#116">116</a>         mockMvc.perform(post(<span class="jxr_string">"/rating/update/{id}"</span>, idString).with(csrf())
+<a name="116" href="#116">116</a>         mockMvc.perform(put(<span class="jxr_string">"/rating/update/{id}"</span>, idString).with(csrf())
 <a name="117" href="#117">117</a>                 .param(<span class="jxr_string">"moodysRating"</span>, <span class="jxr_string">"moodysRating"</span>)
 <a name="118" href="#118">118</a>                 .param(<span class="jxr_string">"sandPRating"</span>, <span class="jxr_string">"sandPRating"</span>)
 <a name="119" href="#119">119</a>                 .param(<span class="jxr_string">"fitchRating"</span>, <span class="jxr_string">"fitchRating"</span>)
@@ -137,7 +137,7 @@
 <a name="127" href="#127">127</a> 
 <a name="128" href="#128">128</a>         <em class="jxr_comment">// Type orderNumber is string =&gt; has error</em>
 <a name="129" href="#129">129</a>         String idString = <span class="jxr_string">"1"</span>;
-<a name="130" href="#130">130</a>         mockMvc.perform(post(<span class="jxr_string">"/rating/update/{id}"</span>, idString).with(
+<a name="130" href="#130">130</a>         mockMvc.perform(put(<span class="jxr_string">"/rating/update/{id}"</span>, idString).with(
 <a name="131" href="#131">131</a>                 csrf())
 <a name="132" href="#132">132</a>                 .param(<span class="jxr_string">"moodysRating"</span>, <span class="jxr_string">"moodysRating"</span>)
 <a name="133" href="#133">133</a>                 .param(<span class="jxr_string">"sandPRating"</span>, <span class="jxr_string">"sandPRating"</span>)
@@ -149,19 +149,33 @@
 <a name="139" href="#139">139</a> 
 <a name="140" href="#140">140</a>     @Test
 <a name="141" href="#141">141</a>     @WithMockUser(username = <span class="jxr_string">"user"</span>, password = <span class="jxr_string">"test"</span>)
-<a name="142" href="#142">142</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testDeleteRating() <strong class="jxr_keyword">throws</strong> Exception {
+<a name="142" href="#142">142</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testShowDeleteForm() <strong class="jxr_keyword">throws</strong> Exception {
 <a name="143" href="#143">143</a> 
 <a name="144" href="#144">144</a>         String idString = <span class="jxr_string">"1"</span>;
 <a name="145" href="#145">145</a>         Rating rating = <strong class="jxr_keyword">new</strong> Rating();
 <a name="146" href="#146">146</a>         rating.setId(Integer.parseInt(idString));
-<a name="147" href="#147">147</a>         rating.setFitchRating(<span class="jxr_string">"FitchRating"</span>);
+<a name="147" href="#147">147</a>         rating.setFitchRating(<span class="jxr_string">"FirtchRating"</span>);
 <a name="148" href="#148">148</a>         Optional&lt;Rating&gt; optionalRating = Optional.of(rating);
 <a name="149" href="#149">149</a> 
 <a name="150" href="#150">150</a>         when(ratingRepository.findById(Integer.parseInt(idString))).thenReturn(optionalRating);
-<a name="151" href="#151">151</a>         mockMvc.perform(get(<span class="jxr_string">"/rating/delete/{id}"</span>, idString)).andExpect(status().isFound());
+<a name="151" href="#151">151</a>         mockMvc.perform(get(<span class="jxr_string">"/rating/delete/{id}"</span>, idString)).andExpect(status().isOk());
 <a name="152" href="#152">152</a>     }
 <a name="153" href="#153">153</a> 
-<a name="154" href="#154">154</a> }
+<a name="154" href="#154">154</a>     @Test
+<a name="155" href="#155">155</a>     @WithMockUser(username = <span class="jxr_string">"user"</span>, password = <span class="jxr_string">"test"</span>)
+<a name="156" href="#156">156</a>     <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testDeleteRating() <strong class="jxr_keyword">throws</strong> Exception {
+<a name="157" href="#157">157</a> 
+<a name="158" href="#158">158</a>         String idString = <span class="jxr_string">"1"</span>;
+<a name="159" href="#159">159</a>         Rating rating = <strong class="jxr_keyword">new</strong> Rating();
+<a name="160" href="#160">160</a>         rating.setId(Integer.parseInt(idString));
+<a name="161" href="#161">161</a>         rating.setFitchRating(<span class="jxr_string">"FitchRating"</span>);
+<a name="162" href="#162">162</a>         Optional&lt;Rating&gt; optionalRating = Optional.of(rating);
+<a name="163" href="#163">163</a> 
+<a name="164" href="#164">164</a>         when(ratingRepository.findById(Integer.parseInt(idString))).thenReturn(optionalRating);
+<a name="165" href="#165">165</a>         mockMvc.perform(delete(<span class="jxr_string">"/rating/delete/{id}"</span>, idString).with(csrf())).andExpect(redirectedUrl(<span class="jxr_string">"/rating/list"</span>));
+<a name="166" href="#166">166</a>     }
+<a name="167" href="#167">167</a> 
+<a name="168" href="#168">168</a> }
 </pre>
 <hr/><div id="footer">This page was automatically generated by <a href="http://maven.apache.org/">Maven</a></div></body>
 </html>

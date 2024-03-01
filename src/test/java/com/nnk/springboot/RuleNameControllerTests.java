@@ -120,7 +120,7 @@ public class RuleNameControllerTests {
     public void testUpdateRuleName() throws Exception {
 
         String idString = "1";
-        mockMvc.perform(post("/ruleName/update/{id}", idString).with(csrf())
+        mockMvc.perform(put("/ruleName/update/{id}", idString).with(csrf())
                 .param("name", "name")
                 .param("description", "description")
                 .param("json", "json")
@@ -136,7 +136,7 @@ public class RuleNameControllerTests {
 
         // Values name is empty => has error
         String idString = "1";
-        mockMvc.perform(post("/ruleName/update/{id}", idString).with(
+        mockMvc.perform(put("/ruleName/update/{id}", idString).with(
                 csrf())
                 .param("name", "")
                 .param("description", "description")
@@ -150,6 +150,20 @@ public class RuleNameControllerTests {
 
     @Test
     @WithMockUser(username = "user", password = "test")
+    public void testShowDeleteForm() throws Exception {
+
+        String idString = "1";
+        RuleName ruleName = new RuleName();
+        ruleName.setId(Integer.parseInt(idString));
+        ruleName.setName("name");
+        Optional<RuleName> optionalRuleName = Optional.of(ruleName);
+
+        when(ruleNameRepository.findById(Integer.parseInt(idString))).thenReturn(optionalRuleName);
+        mockMvc.perform(get("/ruleName/delete/{id}", idString)).andExpect(status().isOk());
+    }
+
+    @Test
+    @WithMockUser(username = "user", password = "test")
     public void testDeleteRuleName() throws Exception {
 
         String idString = "1";
@@ -159,7 +173,8 @@ public class RuleNameControllerTests {
         Optional<RuleName> optionalRuleName = Optional.of(ruleName);
 
         when(ruleNameRepository.findById(Integer.parseInt(idString))).thenReturn(optionalRuleName);
-        mockMvc.perform(get("/ruleName/delete/{id}", idString)).andExpect(status().isFound());
+        mockMvc.perform(delete("/ruleName/delete/{id}", idString).with(csrf()))
+                .andExpect(redirectedUrl("/ruleName/list"));
     }
 
 }

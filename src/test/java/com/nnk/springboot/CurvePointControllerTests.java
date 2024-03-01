@@ -131,7 +131,7 @@ public class CurvePointControllerTests {
     public void testUpdateCurvePoint() throws Exception {
 
         String idString = "1";
-        mockMvc.perform(post("/curvePoint/update/{id}", idString).with(csrf())
+        mockMvc.perform(put("/curvePoint/update/{id}", idString).with(csrf())
                 .param("asOfDateString", "2023-07-20T22:20")
                 .param("curveId", "1")
                 .param("term", "2")
@@ -146,7 +146,7 @@ public class CurvePointControllerTests {
 
         // Type integer curveId is error => has error
         String idString = "1";
-        mockMvc.perform(post("/curvePoint/update/{id}", idString).with(
+        mockMvc.perform(put("/curvePoint/update/{id}", idString).with(
                 csrf())
                 .param("asOfDateString", "2023-07-20T22:20")
                 .param("curveId", "a")
@@ -155,6 +155,20 @@ public class CurvePointControllerTests {
                 .param("creationDateString", "2023-07-21T22:20"))
                 .andDo(print())
                 .andExpect(status().isBadRequest()); // respose 400
+    }
+
+    @Test
+    @WithMockUser(username = "user", password = "test")
+    public void testShowDeleteForm() throws Exception {
+
+        String idString = "1";
+        CurvePoint curvePoint = new CurvePoint();
+        curvePoint.setId(Integer.parseInt(idString));
+        curvePoint.setValue(2.0);
+        Optional<CurvePoint> optionalCurvePoint = Optional.of(curvePoint);
+
+        when(curvePointRepository.findById(Integer.parseInt(idString))).thenReturn(optionalCurvePoint);
+        mockMvc.perform(get("/curvePoint/delete/{id}", idString)).andExpect(status().isOk());
     }
 
     @Test
@@ -168,7 +182,8 @@ public class CurvePointControllerTests {
         Optional<CurvePoint> optionalCurvePoint = Optional.of(curvePoint);
 
         when(curvePointRepository.findById(Integer.parseInt(idString))).thenReturn(optionalCurvePoint);
-        mockMvc.perform(get("/curvePoint/delete/{id}", idString)).andExpect(status().isFound());
+        mockMvc.perform(delete("/curvePoint/delete/{id}", idString).with(csrf()))
+                .andExpect(redirectedUrl("/curvePoint/list"));
     }
 
 }
