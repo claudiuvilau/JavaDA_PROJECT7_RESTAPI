@@ -9,11 +9,11 @@
 <body>
 <div class="container">
 	<div class="row">
-		<h2>Update Bid</h2>
+		<h2>Delete Bid</h2>
 	</div>
 
 	<div class="row">
-		<form action="#" th:action="@{/bidList/update/{id}(id=${bidList.bidlistId})}" th:object="${bidList}" method="delete" class="form-horizontal" style="width: 100%">
+		<form action="#" th:action="@{/bidList/delete/{id}(id=${bidList.bidlistId})}" th:object="${bidList}" th:method="delete" class="form-horizontal" style="width: 100%">
 			<div class="form-group">
 				<label for="account" class="col-sm-2 control-label">Account</label>
 				<div class="col-sm-10">
